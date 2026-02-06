@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albert Anony | Database</title>
+    <style>
+        /* Dasar & Font */
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Background Matrix Canvas */
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Kontainer Utama */
+        .main-frame {
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #0f0;
+            padding: 30px;
+            box-shadow: 0 0 20px #0f0;
+            text-align: center;
+            max-width: 900px;
+            width: 90%;
+        }
+
+        /* Judul Warna-Warni Beranimasi */
+        h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow_move 3s linear infinite;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes rainbow_move {
+            0% { background-position: 0%; }
+            100% { background-position: 200%; }
+        }
+
+        /* Gaya Tabel Hacker */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(0, 20, 0, 0.5);
+        }
+
+        th, td {
+            border: 1px solid #0f0;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #003300;
+            color: #00ffff; /* Warna Cyan untuk Header */
+            text-transform: uppercase;
+        }
+
+        /* Baris Tabel Warna-Warni */
+        tr:nth-child(1) td { color: #ff3e3e; } /* Merah */
+        tr:nth-child(2) td { color: #3eff3e; } /* Hijau */
+        tr:nth-child(3) td { color: #3e3eff; } /* Biru */
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            background: #0f0;
+            color: #000;
+        }
+
+        .status-bar {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="main-frame">
+        <h1>Welcome To Website Albert Anony</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Service Type</th>
+                    <th>Target / Connection</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bot OSINT Telegram</td>
+                    <td><a href="https://t.me/osintnikfreebot" target="_blank">@osintnikfreebot</a></td>
+                    <td>ONLINE</td>
+                </tr>
+                <tr>
+                    <td>Owner WhatsApp</td>
+                    <td><a href="https://wa.me/6287775547657" target="_blank">6287775547657</a></td>
+                    <td>CONNECTED</td>
+                </tr>
+                <tr>
+                    <td>Developer Telegram</td>
+                    <td><a href="https://t.me/albertlstzz" target="_blank">t.me/albertlstzz</a></td>
+                    <td>ENCRYPTED</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="status-bar">
+            [SYSTEM] Connection Secure... <span class="blink">_</span>
+        </div>
+    </div>
+
+    <script>
+        // Script untuk efek Matrix
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#0f0";
+            ctx.font = fontSize + "px arial";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
